@@ -1,0 +1,66 @@
+{
+  "invariants": [
+    {
+      "invariant_id": "PT-001",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.2",
+      "isa_clause": "ISA-84 SIL 2 pressure SIS",
+      "category": "pressure_protection",
+      "description": "High pressure trip: When process pressure reaches HIGH alarm setpoint, an alarm shall be generated. When it reaches HIGH-HIGH trip setpoint, equipment shall be stopped.",
+      "applicable_equipment_classes": ["Pump", "Compressor", "Vessel"],
+      "applicable_sensor_classes": ["PressureTransmitter"],
+      "trip_levels": ["HIGH_ALARM", "HIGH_HIGH_TRIP"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "P_H → ALARM; P_HH → STOP",
+        "variables": [
+          {"name": "pressure", "type": "Real"},
+          {"name": "alarm_active", "type": "Bool"},
+          {"name": "equipment_running", "type": "Bool"},
+          {"name": "p_high", "type": "Real"},
+          {"name": "p_high_high", "type": "Real"}
+        ],
+        "invariant_assertion": "(and (=> (>= pressure p_high) alarm_active) (=> (>= pressure p_high_high) (not equipment_running)))",
+        "omission_check": "Missing HIGH alarm or HIGH-HIGH trip for pressure on {equipment}"
+      }
+    },
+    {
+      "invariant_id": "PT-002",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.2",
+      "category": "pressure_protection",
+      "description": "Low pressure trip: When suction pressure drops to LOW-LOW, pump shall stop to prevent cavitation and mechanical damage.",
+      "applicable_equipment_classes": ["Pump"],
+      "applicable_sensor_classes": ["PressureTransmitter"],
+      "trip_levels": ["LOW_ALARM", "LOW_LOW_TRIP"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "P_L → ALARM; P_LL → STOP",
+        "variables": [
+          {"name": "pressure", "type": "Real"},
+          {"name": "alarm_active", "type": "Bool"},
+          {"name": "pump_running", "type": "Bool"},
+          {"name": "p_low", "type": "Real"},
+          {"name": "p_low_low", "type": "Real"}
+        ],
+        "invariant_assertion": "(and (=> (<= pressure p_low) alarm_active) (=> (<= pressure p_low_low) (not pump_running)))",
+        "omission_check": "Missing LOW alarm or LOW-LOW trip for pump suction pressure on {equipment}"
+      }
+    },
+    {
+      "invariant_id": "PT-003",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.2",
+      "category": "pressure_protection",
+      "description": "Pressure relief valve must be present for any vessel operating above atmospheric pressure. Its setpoint must be documented.",
+      "applicable_equipment_classes": ["Vessel", "Tank"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "relief_valve_setpoint_documented = True",
+        "variables": [
+          {"name": "relief_valve_present", "type": "Bool"},
+          {"name": "relief_setpoint_documented", "type": "Bool"}
+        ],
+        "invariant_assertion": "(and relief_valve_present relief_setpoint_documented)",
+        "omission_check": "No pressure relief valve or setpoint documented for vessel {equipment}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+%% ============================================================
+%% references.bib — Safety Auditing paper
+%% All [TODO] entries resolved. Verify pages/DOIs on IEEE Xplore
+%% before final submission.
+%% ============================================================
+
+%% --- CORE FORMAL METHODS ---
+
+@inproceedings{moura2008z3,
+  author    = {de Moura, Leonardo and Bj{\o}rner, Nikolaj},
+  title     = {{Z3}: An Efficient {SMT} Solver},
+  booktitle = {Proc. Int. Conf. on Tools and Algorithms for
+               the Construction and Analysis of Systems (TACAS)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {4963},
+  pages     = {337--340},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  year      = {2008},
+  doi       = {10.1007/978-3-540-78800-3_24}
+}
+
+@book{clarke1999model,
+  author    = {Clarke, Edmund M. and Grumberg, Orna and Peled, Doron A.},
+  title     = {Model Checking},
+  publisher = {MIT Press},
+  address   = {Cambridge, MA, USA},
+  year      = {1999}
+}
+
+@article{heimdahl1996completeness,
+  author    = {Heimdahl, Mats P. E. and Leveson, Nancy G.},
+  title     = {Completeness and Consistency in Hierarchical State-Based Requirements},
+  journal   = {IEEE Transactions on Software Engineering},
+  volume    = {22},
+  number    = {6},
+  pages     = {363--377},
+  year      = {1996},
+  doi       = {10.1109/32.508311}
+}
+
+@inproceedings{mery2011event_b,
+  author    = {M{\'e}ry, Dominique and Singh, Neeraj Kumar},
+  title     = {Automatic Code Generation from {Event-B} Models},
+  booktitle = {Proc. of the ACM Symposium on Applied Computing (SAC)},
+  pages     = {1501--1506},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  year      = {2011},
+  doi       = {10.1145/1982185.1982495}
+}
+
+%% --- SAFETY STANDARDS AND REFERENCES ---
+
+@techreport{iec61511,
+  title       = {{IEC 61511}: Functional Safety -- Safety Instrumented Systems for
+                 the Process Industry Sector -- Part 1: Framework, Definitions,
+                 System, Hardware and Application Programming Requirements},
+  institution = {International Electrotechnical Commission},
+  address     = {Geneva, Switzerland},
+  year        = {2016},
+  note        = {Edition 2.0}
+}
+
+@techreport{isa84,
+  title       = {{ISA-84.00.01-2004}: Functional Safety -- Safety Instrumented
+                 Systems for the Process Industry Sector},
+  institution = {International Society of Automation},
+  address     = {Research Triangle Park, NC, USA},
+  year        = {2004}
+}
+
+@book{leveson2011,
+  author    = {Leveson, Nancy G.},
+  title     = {Engineering a Safer World: Systems Thinking Applied to Safety},
+  publisher = {MIT Press},
+  address   = {Cambridge, MA, USA},
+  year      = {2011}
+}
+
+%% --- ICS / P&ID PROCESSING AND PLC GENERATION ---
+
+%% P&ID digitisation: complete automated pipeline for extracting graph structure
+@inproceedings{paliwal2021digitize,
+  author    = {Paliwal, Sumit and Jain, Aniket and Sharma, Mohit and Vig, Lovekesh},
+  title     = {Digitize-{PID}: Automatic Digitization of Piping and Instrumentation Diagrams},
+  booktitle = {Proc. of the Pacific-Asia Conference on Knowledge Discovery and Data Mining (PAKDD)},
+  series    = {Lecture Notes in Artificial Intelligence},
+  volume    = {12713},
+  pages     = {110--122},
+  publisher = {Springer},
+  year      = {2021},
+  doi       = {10.1007/978-3-030-75765-6_9}
+}
+
+%% LLM-based PLC / DCS control logic from natural language (ChatGPT study)
+@inproceedings{koziolek2023chatgpt,
+  author    = {Koziolek, Heiko and Gruener, Stefan and Ashiwal, Vinay},
+  title     = {{ChatGPT} for {PLC}/{DCS} Control Logic Generation},
+  booktitle = {Proc. of the IEEE 28th International Conference on Emerging Technologies
+               and Factory Automation (ETFA)},
+  pages     = {1--8},
+  publisher = {IEEE},
+  year      = {2023},
+  doi       = {10.1109/ETFA54631.2023.10275505}
+}
+
+%% LLM4PLC: formal verification of LLM-generated PLC programs
+@inproceedings{fakih2024llm4plc,
+  author    = {Fakih, Mohamad and Dharmaji, Rahul and Moghaddas, Yash and Quiros, Gabriel},
+  title     = {{LLM4PLC}: Harnessing Large Language Models for Verifiable Programming
+               of {PLCs} in Industrial Control Systems},
+  booktitle = {Proc. of the 46th International Conference on Software Engineering
+               (ICSE), SEIP Track},
+  pages     = {1--12},
+  publisher = {ACM},
+  year      = {2024},
+  doi       = {10.1145/3639477.3639747}
+}
+
+%% --- NEURO-SYMBOLIC AI ---
+
+@article{garcez2019,
+  author    = {Garcez, Artur d'Avila and Gori, Marco and Lamb, Luis C.
+               and Serafini, Luciano and Spranger, Michael and Tran, Son N.},
+  title     = {Neural-Symbolic Computing: An Effective Methodology for Principled
+               Integration of Machine Learning and Reasoning},
+  journal   = {Journal of Applied Logics},
+  volume    = {6},
+  number    = {4},
+  pages     = {611--631},
+  year      = {2019}
+}
+
+%% --- LLM / EXTRACTION MODELS ---
+
+@techreport{qwen2024,
+  author      = {{Qwen Team}},
+  title       = {{Qwen2.5} Technical Report},
+  institution = {Alibaba Group},
+  year        = {2024},
+  url         = {https://arxiv.org/abs/2412.15115},
+  note        = {arXiv:2412.15115}
+}
+
+@techreport{llama2024,
+  author      = {{Meta AI}},
+  title       = {The {Llama 3} Herd of Models},
+  institution = {Meta AI Research},
+  year        = {2024},
+  url         = {https://arxiv.org/abs/2407.21783},
+  note        = {arXiv:2407.21783}
+}
+
+@article{huang2023hallucination,
+  author  = {Huang, Lei and Yu, Weijiang and Ma, Weitao and others},
+  title   = {A Survey on Hallucination in Large Language Models: Principles,
+             Taxonomy, Challenges, and Open Questions},
+  journal = {arXiv preprint},
+  year    = {2023},
+  note    = {arXiv:2311.05232}
+}
+
+%% --- COMMERCIAL TOOLS (cited for contrast) ---
+
+@misc{scade,
+  author       = {{Ansys Inc.}},
+  title        = {{SCADE Suite}: Model-Based Development for Safety-Critical Software},
+  howpublished = {\url{https://www.ansys.com/products/embedded-software/ansys-scade-suite}},
+  year         = {2024}
+}
+
+%% --- ICS INCIDENT REFERENCES (benchmark ecological validity) ---
+
+%% BP Texas City refinery explosion: instrumentation specification gaps
+@techreport{csb2005,
+  author      = {{U.S. Chemical Safety and Hazard Investigation Board}},
+  title       = {Investigation Report: Refinery Explosion and Fire
+                 ({BP}, Texas City, Texas, March~23,~2005)},
+  institution = {U.S. Chemical Safety Board},
+  number      = {2005-04-I-TX},
+  year        = {2007},
+  url         = {https://www.csb.gov/bp-america-refinery-explosion/}
+}
+
+%% ICS-CERT advisory on missing alarm/shutdown in ICS configurations
+@misc{icscert2016,
+  author       = {{ICS-CERT}},
+  title        = {{ICS-ALERT-16-281-01}: Recommended Practice: Improving
+                 Industrial Control System Cybersecurity with Defense-in-Depth},
+  howpublished = {US Department of Homeland Security -- ICS-CERT},
+  year         = {2016},
+  url          = {https://www.cisa.gov/ics-cert}
+}
+
+%% NTSB pipeline accident: alarm and interlock deficiencies
+@techreport{ntsb2016,
+  author      = {{National Transportation Safety Board}},
+  title       = {Natural Gas Pipeline Rupture and Fire Near Sissonville,
+                 West Virginia, December~11, 2012},
+  institution = {National Transportation Safety Board},
+  number      = {PAR-13-01},
+  year        = {2013},
+  url         = {https://www.ntsb.gov/investigations/AccidentReports/Reports/PAR1301.pdf}
+}
+
+%% --- SENTENCE TRANSFORMERS ---
+
+@inproceedings{reimers2019sbert,
+  author    = {Reimers, Nils and Gurevych, Iryna},
+  title     = {Sentence-{BERT}: Sentence Embeddings using Siamese {BERT}-Networks},
+  booktitle = {Proc. of the 2019 Conference on Empirical Methods in Natural
+               Language Processing (EMNLP)},
+  pages     = {3982--3992},
+  publisher = {ACL},
+  year      = {2019},
+  doi       = {10.18653/v1/D19-1410}
+}

@@ -1,0 +1,58 @@
+{
+  "invariants": [
+    {
+      "invariant_id": "LV-001",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.3",
+      "category": "level_protection",
+      "description": "High-high level in a vessel shall close the inlet control valve and/or stop the feed pump.",
+      "applicable_equipment_classes": ["Valve", "Pump"],
+      "applicable_sensor_classes": ["LevelTransmitter"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "level_HH >= threshold => inlet_valve CLOSE AND feed_pump STOP",
+        "variables": [
+          {"name": "level", "type": "Real"},
+          {"name": "inlet_valve_open", "type": "Bool"},
+          {"name": "feed_pump_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (>= level {threshold}) (and (not inlet_valve_open) (not feed_pump_running)))",
+        "omission_check": "No rule handles high-high level for inlet to {equipment}"
+      }
+    },
+    {
+      "invariant_id": "LV-002",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.3",
+      "category": "level_protection",
+      "description": "Low-low level in a vessel shall stop the outlet pump to prevent dry running.",
+      "applicable_equipment_classes": ["Pump"],
+      "applicable_sensor_classes": ["LevelTransmitter"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "level_LL <= threshold => outlet_pump STOP",
+        "variables": [
+          {"name": "level", "type": "Real"},
+          {"name": "pump_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (<= level {threshold}) (not pump_running))",
+        "omission_check": "No rule stops outlet pump {equipment} on low-low level"
+      }
+    },
+    {
+      "invariant_id": "LV-003",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.3",
+      "category": "level_protection",
+      "description": "High level alarm shall be set at a level lower than the high-high trip setpoint, providing a warning window.",
+      "applicable_equipment_classes": ["Vessel", "Tank"],
+      "severity_if_missing": "MEDIUM",
+      "z3_template": {
+        "description": "L_high_alarm < L_high_high_trip",
+        "variables": [
+          {"name": "level_high_alarm", "type": "Real"},
+          {"name": "level_high_high_trip", "type": "Real"}
+        ],
+        "invariant_assertion": "(< level_high_alarm level_high_high_trip)",
+        "omission_check": "HIGH alarm setpoint not defined or equals HIGH-HIGH trip setpoint for {equipment}"
+      }
+    }
+  ]
+}

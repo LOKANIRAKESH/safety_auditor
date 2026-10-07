@@ -1,0 +1,72 @@
+{
+  "invariants": [
+    {
+      "invariant_id": "ESD-001",
+      "iec_clause": "IEC 61511-1 Cl. 10.3",
+      "isa_clause": "ISA-84.00.01 Part 1 Cl. 10.3.2",
+      "category": "esd_propagation",
+      "description": "On activation of the emergency shutdown system (ESD), ALL safety-critical equipment (pumps, compressors, feed valves) SHALL be placed in safe state. No critical equipment may remain running after ESD activation.",
+      "applicable_equipment_classes": ["Pump", "Compressor", "Valve", "Motor"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "esd_active => all_critical_equipment_safe",
+        "variables": [
+          {"name": "esd_active", "type": "Bool"},
+          {"name": "any_critical_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> esd_active (not any_critical_running))",
+        "omission_check": "No rule found to stop critical equipment {equipment} on ESD activation"
+      }
+    },
+    {
+      "invariant_id": "ESD-002",
+      "iec_clause": "IEC 61511-1 Cl. 10.3.3",
+      "category": "esd_propagation",
+      "description": "ESD activation shall be logged and an alarm shall be raised in the control system. A silent ESD (no alarm) is a specification defect.",
+      "applicable_equipment_classes": ["Controller"],
+      "severity_if_missing": "MEDIUM",
+      "z3_template": {
+        "description": "esd_active => esd_alarm_raised",
+        "variables": [
+          {"name": "esd_active", "type": "Bool"},
+          {"name": "esd_alarm_raised", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> esd_active esd_alarm_raised)",
+        "omission_check": "No alarm rule for ESD activation in the specification"
+      }
+    },
+    {
+      "invariant_id": "ESD-003",
+      "iec_clause": "IEC 61511-1 Cl. 10.3.3",
+      "category": "esd_propagation",
+      "description": "ESD shall only be reset by an authorised manual action. Automatic ESD reset without operator confirmation is a specification defect.",
+      "applicable_equipment_classes": ["Controller"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "esd_reset => manual_authorisation_required",
+        "variables": [
+          {"name": "esd_active", "type": "Bool"},
+          {"name": "auto_reset_allowed", "type": "Bool"}
+        ],
+        "invariant_assertion": "(not auto_reset_allowed)",
+        "omission_check": "Specification permits automatic ESD reset without operator authorisation"
+      }
+    },
+    {
+      "invariant_id": "ESD-004",
+      "iec_clause": "IEC 61511-1 Cl. 10.3",
+      "category": "esd_propagation",
+      "description": "ESD activation path must be independent of the basic process control system (BPCS). No single common-cause failure should be able to prevent both the ESD and process control from responding.",
+      "applicable_equipment_classes": ["Controller"],
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "esd_path_independent_of_bpcs",
+        "variables": [
+          {"name": "esd_shares_controller_with_bpcs", "type": "Bool"}
+        ],
+        "invariant_assertion": "(not esd_shares_controller_with_bpcs)",
+        "omission_check": "ESD and BPCS share the same PLC — independence requirement of IEC 61511 Cl. 10.3 may be violated"
+      }
+    }
+  ]
+}

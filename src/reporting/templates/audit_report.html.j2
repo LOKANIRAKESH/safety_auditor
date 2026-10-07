@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICS Safety Audit Report</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --border: #334155;
+    --text: #e2e8f0; --muted: #94a3b8;
+    --high: #ef4444; --medium: #f59e0b; --low: #22c55e;
+    --accent: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 2rem; }
+  h1, h2, h3 { color: #f1f5f9; }
+  h1 { font-size: 1.8rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+  h2 { font-size: 1.2rem; color: var(--accent); margin: 2rem 0 1rem; }
+  .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-card .number { font-size: 2.5rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .high-color { color: var(--high); }
+  .medium-color { color: var(--medium); }
+  .low-color { color: var(--low); }
+  .accent-color { color: var(--accent); }
+  .badge { display: inline-block; padding: 0.2em 0.6em; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+  .badge-HIGH { background: rgba(239,68,68,0.15); color: var(--high); }
+  .badge-MEDIUM { background: rgba(245,158,11,0.15); color: var(--medium); }
+  .badge-LOW { background: rgba(34,197,94,0.15); color: var(--low); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th { background: var(--surface); color: var(--muted); text-align: left; padding: 0.6rem 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.72rem; }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:hover td { background: rgba(59,130,246,0.05); }
+  .finding-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; margin-bottom: 1rem; }
+  .finding-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; }
+  .finding-id { font-family: monospace; font-size: 0.85rem; color: var(--muted); }
+  .finding-desc { margin: 0.5rem 0; line-height: 1.5; }
+  .finding-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.8rem; font-size: 0.82rem; }
+  .meta-item { background: rgba(255,255,255,0.03); border-radius: 4px; padding: 0.5rem; }
+  .meta-label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.2rem; }
+  .evidence { font-family: monospace; font-size: 0.8rem; color: #93c5fd; }
+  .recommendation { color: #86efac; }
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .no-findings { text-align: center; color: var(--low); padding: 2rem; font-size: 1.1rem; }
+  .coverage-table { margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<h1>ICS Pre-Synthesis Safety Audit Report</h1>
+<p class="meta">
+  Source: <strong>{{ report.input_source }}</strong> &nbsp;|&nbsp;
+  Generated: {{ generated_at }} &nbsp;|&nbsp;
+  {% if report.is_real_data %}<span style="color:#f59e0b">⚠ REAL DATA</span>{% else %}Synthetic benchmark{% endif %}
+</p>
+
+<!-- Summary Cards -->
+<div class="summary-grid">
+  <div class="stat-card">
+    <div class="number accent-color">{{ report.total_findings }}</div>
+    <div class="label">Total Findings</div>
+  </div>
+  <div class="stat-card">
+    <div class="number high-color">{{ report.high_count }}</div>
+    <div class="label">High Severity</div>
+  </div>
+  <div class="stat-card">
+    <div class="number medium-color">{{ report.medium_count }}</div>
+    <div class="label">Medium Severity</div>
+  </div>
+  <div class="stat-card">
+    <div class="number low-color">{{ report.low_count }}</div>
+    <div class="label">Low Severity</div>
+  </div>
+</div>
+
+<!-- Extraction Stats -->
+<h2>Extraction Statistics</h2>
+<table>
+  <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+  <tbody>
+    {% for key, val in extraction_stats.items() %}
+    <tr><td>{{ key }}</td><td>{{ val }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr class="section-divider">
+
+<!-- Findings Table -->
+<h2>Findings Summary</h2>
+{% if findings %}
+<table>
+  <thead>
+    <tr>
+      <th>Finding ID</th><th>Type</th><th>Severity</th><th>Equipment</th>
+      <th>IEC Clause</th><th>Description</th><th>Evidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in findings %}
+    <tr>
+      <td><code>{{ f.finding_id }}</code></td>
+      <td>{{ f.finding_type.value }}</td>
+      <td><span class="badge badge-{{ f.severity.value }}">{{ f.severity.value }}</span></td>
+      <td><code>{{ f.equipment_tag }}</code></td>
+      <td>{{ f.invariant_iec_clause or '' }}</td>
+      <td>{{ f.description[:120] }}{% if f.description|length > 120 %}…{% endif %}</td>
+      <td class="evidence">{{ f.evidence_summary() }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="no-findings">✓ No findings — specification passes all safety invariant checks.</div>
+{% endif %}
+
+<hr class="section-divider">
+
+<!-- Detailed Finding Cards -->
+<h2>Detailed Findings</h2>
+{% for f in findings %}
+<div class="finding-card">
+  <div class="finding-header">
+    <div>
+      <div class="finding-id">{{ f.finding_id }} · {{ f.finding_type.value }}</div>
+      <strong>{{ f.equipment_tag }}</strong>
+      {% if f.invariant_iec_clause %}<span style="color:var(--muted); font-size:0.8rem"> · {{ f.invariant_iec_clause }}</span>{% endif %}
+    </div>
+    <span class="badge badge-{{ f.severity.value }}">{{ f.severity.value }}</span>
+  </div>
+  <p class="finding-desc">{{ f.description }}</p>
+  <div class="finding-meta">
+    <div class="meta-item">
+      <div class="meta-label">Current State</div>
+      {{ f.current_state or '—' }}
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Expected State</div>
+      {{ f.expected_state or '—' }}
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Evidence</div>
+      <span class="evidence">{{ f.evidence_summary() }}</span>
+    </div>
+    <div class="meta-item recommendation">
+      <div class="meta-label">Recommendation</div>
+      {{ f.recommendation or '—' }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<hr class="section-divider">
+
+<!-- Invariant Coverage Table -->
+<h2>Safety Invariant Coverage ({{ invariant_summary | length }} invariants, IEC 61511-aligned)</h2>
+<div class="coverage-table">
+<table>
+  <thead><tr><th>ID</th><th>IEC Clause</th><th>Category</th><th>Description</th><th>Severity</th></tr></thead>
+  <tbody>
+    {% for inv in invariant_summary %}
+    <tr>
+      <td><code>{{ inv['ID'] }}</code></td>
+      <td>{{ inv['IEC Clause'] }}</td>
+      <td>{{ inv['Category'] }}</td>
+      <td>{{ inv['Description'] }}</td>
+      <td><span class="badge badge-{{ inv['Severity'] }}">{{ inv['Severity'] }}</span></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+<hr class="section-divider">
+<p class="meta" style="text-align:center">
+  Neuro-Symbolic Safety Auditing Framework · Amrita Vishwa Vidyapeetham M.Tech Research ·
+  IEC 61511 / ISA-84 aligned invariants · Z3 SMT solver verification
+</p>
+</body>
+</html>

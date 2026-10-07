@@ -1,0 +1,106 @@
+{
+  "invariants": [
+    {
+      "invariant_id": "SD-001",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.2",
+      "isa_clause": "ISA-84.00.01 Part 1 Cl. 8.2.1",
+      "category": "emergency_shutdown",
+      "description": "If a high-high pressure condition is detected on any pressure sensor, all pumps and compressors in the affected loop shall be commanded to STOP.",
+      "applicable_equipment_classes": ["Pump", "Compressor"],
+      "applicable_sensor_classes": ["PressureTransmitter", "PressureSensor"],
+      "trigger_action": "STOP",
+      "trigger_condition": "HIGH_HIGH",
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "pressure_hh >= threshold => equipment = STOP",
+        "variables": [
+          {"name": "pressure", "type": "Real"},
+          {"name": "equipment_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (>= pressure {threshold}) (not equipment_running))",
+        "omission_check": "No rule stops {equipment} when pressure_hh >= {threshold}"
+      }
+    },
+    {
+      "invariant_id": "SD-002",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.2",
+      "isa_clause": "ISA-84.00.01 Part 1 Cl. 8.2.1",
+      "category": "emergency_shutdown",
+      "description": "If a high-high temperature condition is detected, the affected equipment shall be stopped or put into safe state.",
+      "applicable_equipment_classes": ["Pump", "Reactor", "HeatExchanger"],
+      "applicable_sensor_classes": ["TemperatureTransmitter", "TemperatureSensor"],
+      "trigger_action": "STOP",
+      "trigger_condition": "HIGH_HIGH",
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "temperature_hh >= threshold => equipment = STOP",
+        "variables": [
+          {"name": "temperature", "type": "Real"},
+          {"name": "equipment_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (>= temperature {threshold}) (not equipment_running))",
+        "omission_check": "No rule stops {equipment} when temperature_hh >= {threshold}"
+      }
+    },
+    {
+      "invariant_id": "SD-003",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.2",
+      "category": "emergency_shutdown",
+      "description": "If a low-low level condition is detected in a feed vessel, the downstream pump shall be stopped to prevent cavitation.",
+      "applicable_equipment_classes": ["Pump"],
+      "applicable_sensor_classes": ["LevelTransmitter", "LevelSensor"],
+      "trigger_action": "STOP",
+      "trigger_condition": "LOW_LOW",
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "level_ll <= threshold => pump = STOP",
+        "variables": [
+          {"name": "level", "type": "Real"},
+          {"name": "pump_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (<= level {threshold}) (not pump_running))",
+        "omission_check": "No rule stops {equipment} when level_ll <= {threshold}"
+      }
+    },
+    {
+      "invariant_id": "SD-004",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.3",
+      "category": "emergency_shutdown",
+      "description": "If a high-high flow rate is detected, the associated control valve shall close.",
+      "applicable_equipment_classes": ["Valve"],
+      "applicable_sensor_classes": ["FlowTransmitter"],
+      "trigger_action": "CLOSE",
+      "trigger_condition": "HIGH_HIGH",
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "flow_hh >= threshold => valve = CLOSE",
+        "variables": [
+          {"name": "flow", "type": "Real"},
+          {"name": "valve_open", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (>= flow {threshold}) (not valve_open))",
+        "omission_check": "No rule closes {equipment} when flow_hh >= {threshold}"
+      }
+    },
+    {
+      "invariant_id": "SD-005",
+      "iec_clause": "IEC 61511-1 Cl. 9.2.3",
+      "category": "emergency_shutdown",
+      "description": "High differential pressure across a pump (exceeding safe limit) shall cause pump shutdown.",
+      "applicable_equipment_classes": ["Pump"],
+      "applicable_sensor_classes": ["DifferentialPressureTransmitter"],
+      "trigger_action": "STOP",
+      "trigger_condition": "HIGH_HIGH",
+      "severity_if_missing": "HIGH",
+      "z3_template": {
+        "description": "dp_hh >= threshold => pump = STOP",
+        "variables": [
+          {"name": "differential_pressure", "type": "Real"},
+          {"name": "pump_running", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> (>= differential_pressure {threshold}) (not pump_running))",
+        "omission_check": "No rule stops {equipment} when differential pressure >= {threshold}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+# Target Conference Guide — 2027 Submission Planning
+
+## Recommended venues (best fit for this research, ranked)
+
+---
+
+### 1. IEEE ETFA 2027 — IEEE Conference on Emerging Technologies & Factory Automation
+**Fit:** Very High | **Tier:** Mid-tier IEEE | **Difficulty:** Moderate
+
+- **Why this fits:** ETFA covers industrial automation, factory control systems, and AI for manufacturing.
+  Your neuro-symbolic + ICS safety topic is exactly what this community publishes.
+- **Page limit:** 8 pages (IEEE format)
+- **Typical deadline:** April–May for a September conference
+- **What to emphasize:** Industrial applicability, the Schneider Electric real-data run, PLC code generation demo
+- **Website:** https://www.etfa-2027.org (check for updated dates)
+
+**Action:** Search "IEEE ETFA 2027 call for papers" in January 2027.
+
+---
+
+### 2. IEEE CASE 2027 — International Conference on Automation Science and Engineering
+**Fit:** High | **Tier:** Mid-tier IEEE | **Difficulty:** Moderate-High
+
+- **Why this fits:** CASE covers automation science, including AI-assisted control system design.
+  Your evaluation metrics and systematic benchmark make it suitable for this venue.
+- **Page limit:** 6–8 pages
+- **Typical deadline:** February–March for an August conference
+- **What to emphasize:** The formal evaluation (P/R/F1), ablation study results, comparison methodology
+
+---
+
+### 3. FMICS 2027 — Formal Methods for Industrial Critical Systems (IFIP WG 10.6)
+**Fit:** Very High | **Tier:** Workshop-level (but highest prestige for this specific niche) | **Difficulty:** Lower
+
+- **Why this fits:** FMICS is specifically about formal methods for industrial control systems.
+  Your Z3 verification approach will be immediately understood and valued by these reviewers.
+- **Page limit:** 15–20 pages (LNCS format)
+- **Typical deadline:** March–April for a September/October workshop
+- **What to emphasize:** Z3 encoding, invariant library design, IEC 61511 alignment, formal correctness
+- **IMPORTANT:** FMICS reviewers are formal methods experts — your Z3 encoding must be rigorous.
+  Have Dr. Raviteja check the Z3 formulations before submission.
+
+**Recommended as first submission target** — strongest reviewer fit, lower bar than ETFA/CASE.
+
+---
+
+### 4. SafeComp 2027 — International Conference on Computer Safety, Reliability and Security
+**Fit:** Very High | **Tier:** Strong non-IEEE (Springer LNCS) | **Difficulty:** High
+
+- **Why this fits:** SafeComp is the premier academic venue for safety-critical systems.
+  Accepted papers from SafeComp are highly cited in both industry and academia.
+- **Page limit:** 15 pages (LNCS)
+- **Typical deadline:** March for a September conference
+- **What to emphasize:** The IEC 61511 alignment, safety invariant library, real-data validation
+- **Warning:** SafeComp reviewers include formal methods, dependability, and safety engineering experts.
+  The related work section MUST cover all traditional tools (SCADE, HAZOP analysis).
+  Do NOT submit here without completing the CITATION_TODO.md items first.
+
+---
+
+### 5. IEEE SMC 2027 — Systems, Man, and Cybernetics
+**Fit:** Medium | **Tier:** Mid-tier IEEE | **Difficulty:** Moderate
+
+- **Why this fits:** SMC covers neuro-symbolic AI, cyber-physical systems, and human-machine interaction.
+  Suitable if you want to emphasize the AI/ML contribution over the ICS safety angle.
+
+---
+
+## Submission Timeline (working backward from FMICS)
+
+Assuming FMICS 2027 deadline is ~April 2027:
+
+| Milestone | Target Date |
+|-----------|-------------|
+| Literature review complete | Nov 2026 |
+| Phase 1-5 implementation done | Dec 2026 |
+| Benchmark corpus (50 packages) generated | Jan 2027 |
+| Evaluation results (P/R/F1) computed | Jan 2027 |
+| Schneider Electric real-data run | Feb 2027 |
+| Paper first draft (all sections) | Feb 2027 |
+| Guide review (Dr. Raviteja) | Mar 2027 |
+| Revision + polish | Mar 2027 |
+| **SUBMISSION** | Apr 2027 |
+| Notification | Jun 2027 |
+| Camera-ready | Jul 2027 |
+| Conference | Sep/Oct 2027 |
+
+---
+
+## Paper Structure Suggestion (8-page IEEE format)
+
+1. **Introduction** (1 page) — problem statement, pre-synthesis gap claim
+2. **Related Work** (1.5 pages) — 4 categories + HAZOP + commercial tools (DO NOT SKIP)
+3. **Framework Architecture** (1.5 pages) — system diagram, phase overview
+4. **Methodology** (1.5 pages) — phases 2, 3, 5, 6, 7 in detail
+5. **Evaluation** (1.5 pages) — benchmark, metrics table, ablation study, Schneider Electric run
+6. **Discussion & Limitations** (0.5 pages) — P&ID scope, LLM errors, template library bounds
+7. **Conclusion** (0.5 pages)
+
+**Figures to include:**
+- Fig 1: System architecture pipeline diagram
+- Fig 2: Z3 encoding example (contradiction detection)
+- Table 1: Comparison with prior approaches (your Table 2.1, expanded)
+- Table 2: P/R/F1 results per defect category
+- Table 3: Invariant library summary (IEC 61511 clauses) — already generated by `evaluation/run_evaluation.py`
+
+The code in this project generates Table 2 and Table 3 automatically.
+Fig 1 and Fig 2 must be drawn manually (recommend draw.io or LaTeX tikz).

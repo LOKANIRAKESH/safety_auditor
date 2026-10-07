@@ -1,0 +1,74 @@
+{
+  "invariants": [
+    {
+      "invariant_id": "MX-001",
+      "iec_clause": "IEC 61511-1 Cl. 11.3",
+      "category": "mutual_exclusion",
+      "description": "A valve cannot be simultaneously commanded OPEN and CLOSE. These are mutually exclusive states.",
+      "applicable_equipment_classes": ["Valve"],
+      "severity_if_violated": "HIGH",
+      "z3_template": {
+        "description": "NOT (valve_open AND valve_close)",
+        "variables": [
+          {"name": "valve_open", "type": "Bool"},
+          {"name": "valve_close", "type": "Bool"}
+        ],
+        "invariant_assertion": "(not (and valve_open valve_close))",
+        "contradiction_check": "Rule set allows valve to be simultaneously OPEN and CLOSE"
+      }
+    },
+    {
+      "invariant_id": "MX-002",
+      "iec_clause": "IEC 61511-1 Cl. 11.3",
+      "category": "mutual_exclusion",
+      "description": "A pump cannot be simultaneously commanded to START and STOP.",
+      "applicable_equipment_classes": ["Pump", "Motor", "Compressor"],
+      "severity_if_violated": "HIGH",
+      "z3_template": {
+        "description": "NOT (pump_start AND pump_stop)",
+        "variables": [
+          {"name": "pump_start", "type": "Bool"},
+          {"name": "pump_stop", "type": "Bool"}
+        ],
+        "invariant_assertion": "(not (and pump_start pump_stop))",
+        "contradiction_check": "Rule set allows equipment to be simultaneously started and stopped"
+      }
+    },
+    {
+      "invariant_id": "MX-003",
+      "iec_clause": "IEC 61511-1 Cl. 11.3",
+      "category": "mutual_exclusion",
+      "description": "Two valves in series on a blowdown path cannot both be closed simultaneously (minimum one must remain open during depressurisation).",
+      "applicable_equipment_classes": ["Valve"],
+      "severity_if_violated": "MEDIUM",
+      "z3_template": {
+        "description": "NOT (valve_a_close AND valve_b_close) when depressurisation is active",
+        "variables": [
+          {"name": "valve_a_closed", "type": "Bool"},
+          {"name": "valve_b_closed", "type": "Bool"},
+          {"name": "depressurisation_active", "type": "Bool"}
+        ],
+        "invariant_assertion": "(=> depressurisation_active (not (and valve_a_closed valve_b_closed)))",
+        "contradiction_check": "Both series blowdown valves can be closed during depressurisation"
+      }
+    },
+    {
+      "invariant_id": "MX-004",
+      "iec_clause": "IEC 61511-1 Cl. 11.3",
+      "category": "mutual_exclusion",
+      "description": "A selector switch cannot simultaneously indicate two positions.",
+      "applicable_equipment_classes": ["Controller", "Selector"],
+      "severity_if_violated": "MEDIUM",
+      "z3_template": {
+        "description": "Exactly one of {AUTO, MANUAL, REMOTE} is true at any time",
+        "variables": [
+          {"name": "mode_auto", "type": "Bool"},
+          {"name": "mode_manual", "type": "Bool"},
+          {"name": "mode_remote", "type": "Bool"}
+        ],
+        "invariant_assertion": "(= 1 (+ (if mode_auto 1 0) (if mode_manual 1 0) (if mode_remote 1 0)))",
+        "contradiction_check": "Controller can be in multiple modes simultaneously"
+      }
+    }
+  ]
+}
