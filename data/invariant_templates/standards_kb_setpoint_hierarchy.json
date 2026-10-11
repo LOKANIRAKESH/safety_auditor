@@ -1,0 +1,67 @@
+[
+  {
+    "id": "IEC61511-SEED-001",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.9.2.3",
+    "description": "HIGH alarm setpoint must be set below the HIGH-HIGH trip setpoint to ensure an alarm is raised before the protective shutdown activates.",
+    "requirement_type": "setpoint_hierarchy",
+    "equipment_classes": [
+      "PressureVessel",
+      "Reactor",
+      "Separator",
+      "Tank"
+    ],
+    "sensor_classes": [
+      "LevelTransmitter",
+      "PressureTransmitter",
+      "TemperatureSensor"
+    ],
+    "condition_type": "HIGH",
+    "action_required": "ALARM",
+    "setpoint_role": "ALARM",
+    "iec_equivalent": "IEC 61511 Cl.9.2.3",
+    "confidence": 1.0
+  },
+  {
+    "id": "IEC61511-SEED-002",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.9.2.3",
+    "description": "HIGH-HIGH trip setpoint must be set below the equipment MAWP (Maximum Allowable Working Pressure) with appropriate safety margin.",
+    "requirement_type": "setpoint_hierarchy",
+    "equipment_classes": [
+      "Compressor",
+      "PressureVessel",
+      "Reactor",
+      "Separator"
+    ],
+    "sensor_classes": [
+      "PressureTransmitter"
+    ],
+    "condition_type": "HIGH_HIGH",
+    "action_required": "STOP",
+    "setpoint_role": "TRIP",
+    "iec_equivalent": "IEC 61511 Cl.9.2.3",
+    "confidence": 1.0
+  },
+  {
+    "id": "IEC61511-SEED-003",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.9.2.3",
+    "description": "LOW alarm setpoint must be set above the LOW-LOW trip setpoint so an alarm warns the operator before a low-level protective trip activates.",
+    "requirement_type": "setpoint_hierarchy",
+    "equipment_classes": [
+      "Column",
+      "Drum",
+      "Separator",
+      "Tank"
+    ],
+    "sensor_classes": [
+      "LevelTransmitter"
+    ],
+    "condition_type": "LOW",
+    "action_required": "ALARM",
+    "setpoint_role": "ALARM",
+    "iec_equivalent": "IEC 61511 Cl.9.2.3",
+    "confidence": 1.0
+  }
+]

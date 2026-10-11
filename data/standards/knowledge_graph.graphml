@@ -1,0 +1,1064 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d8" for="edge" attr.name="rel" attr.type="string"/>
+<key id="d7" for="node" attr.name="req_type" attr.type="string"/>
+<key id="d6" for="node" attr.name="confidence" attr.type="double"/>
+<key id="d5" for="node" attr.name="severity" attr.type="string"/>
+<key id="d4" for="node" attr.name="rule_id" attr.type="string"/>
+<key id="d3" for="node" attr.name="standard" attr.type="string"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="label" attr.type="string"/>
+<key id="d0" for="node" attr.name="type" attr.type="string"/>
+<graph edgedefault="directed"><node id="STD:EPA_RMP_40CFR68">
+  <data key="d0">Standard</data>
+  <data key="d1">EPA 40 CFR Part 68</data>
+  <data key="d2">EPA_RMP_40CFR68</data>
+</node>
+<node id="CLAUSE:EPA_RMP_40CFR68:40 CFR 68.69">
+  <data key="d0">Clause</data>
+  <data key="d1">40 CFR 68.69</data>
+  <data key="d3">EPA 40 CFR Part 68</data>
+</node>
+<node id="REQ:EPA_RMP-SEED-002">
+  <data key="d0">Requirement</data>
+  <data key="d1">Operating procedures must address steps for each operating phase including start</data>
+  <data key="d4">EPA_RMP-SEED-002</data>
+  <data key="d5">MEDIUM</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="EQ:Column">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Column</data>
+</node>
+<node id="EQ:Compressor">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Compressor</data>
+</node>
+<node id="EQ:Pump">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Pump</data>
+</node>
+<node id="EQ:Reactor">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Reactor</data>
+</node>
+<node id="ACT:DOCUMENT">
+  <data key="d0">Action</data>
+  <data key="d1">DOCUMENT</data>
+</node>
+<node id="COND:ANY">
+  <data key="d0">Condition</data>
+  <data key="d1">ANY</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.11.8">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.8</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="STD:EMERSON_IEC61511_GUIDE">
+  <data key="d0">Standard</data>
+  <data key="d1">IEC 61511-1:2016</data>
+  <data key="d2">EMERSON_IEC61511_GUIDE</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.2">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.6.2</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-005">
+  <data key="d0">Requirement</data>
+  <data key="d1">A high-temperature alarm must be provided for pump bearing temperature monitored</data>
+  <data key="d4">IEC61511-SEED-005</data>
+  <data key="d5">MEDIUM</data>
+  <data key="d6">0.9</data>
+  <data key="d7">alarm</data>
+</node>
+<node id="SC:TemperatureSensor">
+  <data key="d0">SensorClass</data>
+  <data key="d1">TemperatureSensor</data>
+</node>
+<node id="ACT:ALARM">
+  <data key="d0">Action</data>
+  <data key="d1">ALARM</data>
+</node>
+<node id="COND:HIGH">
+  <data key="d0">Condition</data>
+  <data key="d1">HIGH</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.6</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.10.3.2">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.10.3.2</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-015">
+  <data key="d0">Requirement</data>
+  <data key="d1">All safety instrumented functions must be uniquely identified with a tag number </data>
+  <data key="d4">IEC61511-SEED-015</data>
+  <data key="d5">MEDIUM</data>
+  <data key="d6">1.0</data>
+  <data key="d7">tagging</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.10.3">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.10.3</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="STD:OSHA_PSM_1910_119">
+  <data key="d0">Standard</data>
+  <data key="d1">OSHA 29 CFR 1910.119</data>
+  <data key="d2">OSHA_PSM_1910_119</data>
+</node>
+<node id="CLAUSE:OSHA_PSM_1910_119:1910.119(j)(3)">
+  <data key="d0">Clause</data>
+  <data key="d1">1910.119(j)(3)</data>
+  <data key="d3">OSHA 29 CFR 1910.119</data>
+</node>
+<node id="REQ:OSHA_PSM-SEED-003">
+  <data key="d0">Requirement</data>
+  <data key="d1">Each employer must ensure that each employee involved in operating a process has</data>
+  <data key="d4">OSHA_PSM-SEED-003</data>
+  <data key="d5">MEDIUM</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.5">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.5</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:EPA_RMP_40CFR68:40 CFR 68.67(c)(6)">
+  <data key="d0">Clause</data>
+  <data key="d1">40 CFR 68.67(c)(6)</data>
+  <data key="d3">EPA 40 CFR Part 68</data>
+</node>
+<node id="REQ:EPA_RMP-SEED-001">
+  <data key="d0">Requirement</data>
+  <data key="d1">Process hazard analysis must address engineering and administrative controls app</data>
+  <data key="d4">EPA_RMP-SEED-001</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.8.2">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.8.2</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.9.2.3">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.9.2.3</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-001">
+  <data key="d0">Requirement</data>
+  <data key="d1">HIGH alarm setpoint must be set below the HIGH-HIGH trip setpoint to ensure an a</data>
+  <data key="d4">IEC61511-SEED-001</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">setpoint_hierarchy</data>
+</node>
+<node id="EQ:PressureVessel">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">PressureVessel</data>
+</node>
+<node id="EQ:Separator">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Separator</data>
+</node>
+<node id="EQ:Tank">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Tank</data>
+</node>
+<node id="SC:LevelTransmitter">
+  <data key="d0">SensorClass</data>
+  <data key="d1">LevelTransmitter</data>
+</node>
+<node id="SC:PressureTransmitter">
+  <data key="d0">SensorClass</data>
+  <data key="d1">PressureTransmitter</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.9.2.3">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.9.2.3</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="REQ:IEC61511-SEED-002">
+  <data key="d0">Requirement</data>
+  <data key="d1">HIGH-HIGH trip setpoint must be set below the equipment MAWP (Maximum Allowable </data>
+  <data key="d4">IEC61511-SEED-002</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">setpoint_hierarchy</data>
+</node>
+<node id="ACT:STOP">
+  <data key="d0">Action</data>
+  <data key="d1">STOP</data>
+</node>
+<node id="COND:HIGH_HIGH">
+  <data key="d0">Condition</data>
+  <data key="d1">HIGH_HIGH</data>
+</node>
+<node id="REQ:IEC61511-SEED-003">
+  <data key="d0">Requirement</data>
+  <data key="d1">LOW alarm setpoint must be set above the LOW-LOW trip setpoint so an alarm warns</data>
+  <data key="d4">IEC61511-SEED-003</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">setpoint_hierarchy</data>
+</node>
+<node id="EQ:Drum">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Drum</data>
+</node>
+<node id="COND:LOW">
+  <data key="d0">Condition</data>
+  <data key="d1">LOW</data>
+</node>
+<node id="REQ:IEC61511-SEED-004">
+  <data key="d0">Requirement</data>
+  <data key="d1">A pump must have a low-flow or low-suction-pressure interlock that trips the pum</data>
+  <data key="d4">IEC61511-SEED-004</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.95</data>
+  <data key="d7">interlock</data>
+</node>
+<node id="SC:FlowTransmitter">
+  <data key="d0">SensorClass</data>
+  <data key="d1">FlowTransmitter</data>
+</node>
+<node id="COND:LOW_LOW">
+  <data key="d0">Condition</data>
+  <data key="d1">LOW_LOW</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.3">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.6.3</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-006">
+  <data key="d0">Requirement</data>
+  <data key="d1">A compressor must have a high-high discharge pressure trip that stops the compre</data>
+  <data key="d4">IEC61511-SEED-006</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.95</data>
+  <data key="d7">shutdown</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.4">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.6.4</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-007">
+  <data key="d0">Requirement</data>
+  <data key="d1">A pressure vessel operating above atmospheric pressure must have a pressure reli</data>
+  <data key="d4">IEC61511-SEED-007</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.95</data>
+  <data key="d7">interlock</data>
+</node>
+<node id="ACT:CLOSE">
+  <data key="d0">Action</data>
+  <data key="d1">CLOSE</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.8">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.8</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-008">
+  <data key="d0">Requirement</data>
+  <data key="d1">An Emergency Shutdown (ESD) system must be able to bring the process to a safe s</data>
+  <data key="d4">IEC61511-SEED-008</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">shutdown</data>
+</node>
+<node id="EQ:ESD">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">ESD</data>
+</node>
+<node id="EQ:ShutdownValve">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">ShutdownValve</data>
+</node>
+<node id="SC:GasDetector">
+  <data key="d0">SensorClass</data>
+  <data key="d1">GasDetector</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.8.3">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.8.3</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-009">
+  <data key="d0">Requirement</data>
+  <data key="d1">ESD system must be independent of the basic process control system (BPCS) to pre</data>
+  <data key="d4">IEC61511-SEED-009</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">interlock</data>
+</node>
+<node id="ACT:VERIFY">
+  <data key="d0">Action</data>
+  <data key="d1">VERIFY</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.5">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.6.5</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-010">
+  <data key="d0">Requirement</data>
+  <data key="d1">Safety instrumented function (SIF) final elements (valves, motors) must fail to </data>
+  <data key="d4">IEC61511-SEED-010</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">interlock</data>
+</node>
+<node id="EQ:ControlValve">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">ControlValve</data>
+</node>
+<node id="EQ:Motor">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Motor</data>
+</node>
+<node id="EQ:Valve">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">Valve</data>
+</node>
+<node id="CLAUSE:OSHA_PSM_1910_119:1910.119(d)(3)(i)(B)">
+  <data key="d0">Clause</data>
+  <data key="d1">1910.119(d)(3)(i)(B)</data>
+  <data key="d3">OSHA 29 CFR 1910.119</data>
+</node>
+<node id="REQ:IEC61511-SEED-011">
+  <data key="d0">Requirement</data>
+  <data key="d1">Process safety information must document relief system design basis for toxic or</data>
+  <data key="d4">IEC61511-SEED-011</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.9</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="EQ:FireDetector">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">FireDetector</data>
+</node>
+<node id="EQ:GasDetector">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">GasDetector</data>
+</node>
+<node id="EQ:SafetyValve">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">SafetyValve</data>
+</node>
+<node id="SC:FireDetector">
+  <data key="d0">SensorClass</data>
+  <data key="d1">FireDetector</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.6">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.6.6</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-012">
+  <data key="d0">Requirement</data>
+  <data key="d1">A combustible or toxic gas detector must trigger a HIGH alarm before concentrati</data>
+  <data key="d4">IEC61511-SEED-012</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.9</data>
+  <data key="d7">alarm</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.16.4">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.16.4</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-013">
+  <data key="d0">Requirement</data>
+  <data key="d1">Every safety instrumented function must be proof-tested at a frequency sufficien</data>
+  <data key="d4">IEC61511-SEED-013</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="COND:ON_DEMAND">
+  <data key="d0">Condition</data>
+  <data key="d1">ON_DEMAND</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.16.4">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.16.4</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.4.3">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.4.3</data>
+  <data key="d3">IEC 61511-1:2016</data>
+</node>
+<node id="REQ:IEC61511-SEED-014">
+  <data key="d0">Requirement</data>
+  <data key="d1">SIL 2 or higher safety instrumented functions require redundant sensors (1oo2 or</data>
+  <data key="d4">IEC61511-SEED-014</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.9</data>
+  <data key="d7">interlock</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.11.4">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.11.4</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="STD:NIST_SP800_82">
+  <data key="d0">Standard</data>
+  <data key="d1">NIST SP 800-82 Rev.3</data>
+  <data key="d2">NIST_SP800_82</data>
+</node>
+<node id="CLAUSE:NIST_SP800_82:NIST SP 800-82 §5.3">
+  <data key="d0">Clause</data>
+  <data key="d1">NIST SP 800-82 §5.3</data>
+  <data key="d3">NIST SP 800-82 Rev.3</data>
+</node>
+<node id="REQ:NIST-SEED-001">
+  <data key="d0">Requirement</data>
+  <data key="d1">Safety instrumented systems must be isolated from corporate IT networks; any con</data>
+  <data key="d4">NIST-SEED-001</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">0.9</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.8.2.4">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.8.2.4</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:OSHA_PSM_1910_119:1910.119(d)(3)(i)">
+  <data key="d0">Clause</data>
+  <data key="d1">1910.119(d)(3)(i)</data>
+  <data key="d3">OSHA 29 CFR 1910.119</data>
+</node>
+<node id="REQ:OSHA_PSM-SEED-001">
+  <data key="d0">Requirement</data>
+  <data key="d1">Process safety information must include relief system design and design basis fo</data>
+  <data key="d4">OSHA_PSM-SEED-001</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.10.3.2">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.10.3.2</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:OSHA_PSM_1910_119:1910.119(j)(4)(ii)">
+  <data key="d0">Clause</data>
+  <data key="d1">1910.119(j)(4)(ii)</data>
+  <data key="d3">OSHA 29 CFR 1910.119</data>
+</node>
+<node id="REQ:OSHA_PSM-SEED-002">
+  <data key="d0">Requirement</data>
+  <data key="d1">Written procedures must be established and implemented for maintaining the mecha</data>
+  <data key="d4">OSHA_PSM-SEED-002</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="EQ:ReliefValve">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">ReliefValve</data>
+</node>
+<node id="EQ:RuptureDisc">
+  <data key="d0">EquipmentClass</data>
+  <data key="d1">RuptureDisc</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.16">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.16</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:OSHA_PSM_1910_119:1910.119(e)(1)">
+  <data key="d0">Clause</data>
+  <data key="d1">1910.119(e)(1)</data>
+  <data key="d3">OSHA 29 CFR 1910.119</data>
+</node>
+<node id="REQ:OSHA_PSM-SEED-004">
+  <data key="d0">Requirement</data>
+  <data key="d1">The employer must perform an initial process hazard analysis (PHA) on processes </data>
+  <data key="d4">OSHA_PSM-SEED-004</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">documentation</data>
+</node>
+<node id="CLAUSE:IEC61511:IEC 61511 Cl.8">
+  <data key="d0">Clause</data>
+  <data key="d1">IEC 61511 Cl.8</data>
+  <data key="d3">IEC 61511</data>
+</node>
+<node id="CLAUSE:OSHA_PSM_1910_119:1910.119(f)(1)">
+  <data key="d0">Clause</data>
+  <data key="d1">1910.119(f)(1)</data>
+  <data key="d3">OSHA 29 CFR 1910.119</data>
+</node>
+<node id="REQ:OSHA_PSM-SEED-005">
+  <data key="d0">Requirement</data>
+  <data key="d1">The employer must develop and implement written operating procedures that provid</data>
+  <data key="d4">OSHA_PSM-SEED-005</data>
+  <data key="d5">HIGH</data>
+  <data key="d6">1.0</data>
+  <data key="d7">shutdown</data>
+</node>
+<edge source="STD:EPA_RMP_40CFR68" target="CLAUSE:EPA_RMP_40CFR68:40 CFR 68.69">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EPA_RMP_40CFR68" target="CLAUSE:EPA_RMP_40CFR68:40 CFR 68.67(c)(6)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="CLAUSE:EPA_RMP_40CFR68:40 CFR 68.69" target="REQ:EPA_RMP-SEED-002">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="EQ:Column">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="EQ:Compressor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="EQ:Pump">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-002" target="CLAUSE:IEC61511:IEC 61511 Cl.11.8">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.2">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.10.3.2">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.9.2.3">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.3">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.4">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.8">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.8.3">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.5">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.6">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.16.4">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:EMERSON_IEC61511_GUIDE" target="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.4.3">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.2" target="REQ:IEC61511-SEED-005">
+  <data key="d8">contains</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.2" target="REQ:IEC61511-SEED-004">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-005" target="EQ:Pump">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-005" target="SC:TemperatureSensor">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-005" target="ACT:ALARM">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-005" target="COND:HIGH">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-005" target="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.10.3.2" target="REQ:IEC61511-SEED-015">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-015" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-015" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-015" target="CLAUSE:IEC61511:IEC 61511 Cl.10.3">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="STD:OSHA_PSM_1910_119" target="CLAUSE:OSHA_PSM_1910_119:1910.119(j)(3)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:OSHA_PSM_1910_119" target="CLAUSE:OSHA_PSM_1910_119:1910.119(d)(3)(i)(B)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:OSHA_PSM_1910_119" target="CLAUSE:OSHA_PSM_1910_119:1910.119(d)(3)(i)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:OSHA_PSM_1910_119" target="CLAUSE:OSHA_PSM_1910_119:1910.119(j)(4)(ii)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:OSHA_PSM_1910_119" target="CLAUSE:OSHA_PSM_1910_119:1910.119(e)(1)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="STD:OSHA_PSM_1910_119" target="CLAUSE:OSHA_PSM_1910_119:1910.119(f)(1)">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="CLAUSE:OSHA_PSM_1910_119:1910.119(j)(3)" target="REQ:OSHA_PSM-SEED-003">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-003" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-003" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-003" target="CLAUSE:IEC61511:IEC 61511 Cl.5">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EPA_RMP_40CFR68:40 CFR 68.67(c)(6)" target="REQ:EPA_RMP-SEED-001">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-001" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-001" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:EPA_RMP-SEED-001" target="CLAUSE:IEC61511:IEC 61511 Cl.8.2">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.9.2.3" target="REQ:IEC61511-SEED-001">
+  <data key="d8">contains</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.9.2.3" target="REQ:IEC61511-SEED-002">
+  <data key="d8">contains</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.9.2.3" target="REQ:IEC61511-SEED-003">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="EQ:PressureVessel">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="EQ:Separator">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="EQ:Tank">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="SC:LevelTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="SC:TemperatureSensor">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="ACT:ALARM">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="COND:HIGH">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-001" target="CLAUSE:IEC61511:IEC 61511 Cl.9.2.3">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="EQ:Compressor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="EQ:PressureVessel">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="EQ:Separator">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="ACT:STOP">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="COND:HIGH_HIGH">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-002" target="CLAUSE:IEC61511:IEC 61511 Cl.9.2.3">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="EQ:Column">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="EQ:Drum">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="EQ:Separator">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="EQ:Tank">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="SC:LevelTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="ACT:ALARM">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="COND:LOW">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-003" target="CLAUSE:IEC61511:IEC 61511 Cl.9.2.3">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-004" target="EQ:Pump">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-004" target="SC:FlowTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-004" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-004" target="ACT:STOP">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-004" target="COND:LOW_LOW">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-004" target="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.3" target="REQ:IEC61511-SEED-006">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-006" target="EQ:Compressor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-006" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-006" target="ACT:STOP">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-006" target="COND:HIGH_HIGH">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-006" target="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.4" target="REQ:IEC61511-SEED-007">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="EQ:PressureVessel">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="EQ:Separator">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="ACT:CLOSE">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="COND:HIGH_HIGH">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-007" target="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.8" target="REQ:IEC61511-SEED-008">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="EQ:Compressor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="EQ:ESD">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="EQ:Pump">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="EQ:ShutdownValve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="SC:GasDetector">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="SC:LevelTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="ACT:STOP">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-008" target="CLAUSE:IEC61511:IEC 61511 Cl.11.8">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.8.3" target="REQ:IEC61511-SEED-009">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-009" target="EQ:ESD">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-009" target="ACT:VERIFY">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-009" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-009" target="CLAUSE:IEC61511:IEC 61511 Cl.11.8">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.5" target="REQ:IEC61511-SEED-010">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="EQ:ControlValve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="EQ:Motor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="EQ:ShutdownValve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="EQ:Valve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="ACT:CLOSE">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-010" target="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:OSHA_PSM_1910_119:1910.119(d)(3)(i)(B)" target="REQ:IEC61511-SEED-011">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="EQ:FireDetector">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="EQ:GasDetector">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="EQ:SafetyValve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="SC:FireDetector">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="SC:GasDetector">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="ACT:ALARM">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-011" target="CLAUSE:IEC61511:IEC 61511 Cl.10.3">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.6.6" target="REQ:IEC61511-SEED-012">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-012" target="EQ:GasDetector">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-012" target="SC:GasDetector">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-012" target="ACT:ALARM">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-012" target="COND:HIGH">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-012" target="CLAUSE:IEC61511:IEC 61511 Cl.11.6">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.16.4" target="REQ:IEC61511-SEED-013">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-013" target="ACT:VERIFY">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-013" target="COND:ON_DEMAND">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-013" target="CLAUSE:IEC61511:IEC 61511 Cl.16.4">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:EMERSON_IEC61511_GUIDE:IEC 61511 Cl.11.4.3" target="REQ:IEC61511-SEED-014">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="EQ:Compressor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="EQ:PressureVessel">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="SC:LevelTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="SC:TemperatureSensor">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="ACT:VERIFY">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:IEC61511-SEED-014" target="CLAUSE:IEC61511:IEC 61511 Cl.11.4">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="STD:NIST_SP800_82" target="CLAUSE:NIST_SP800_82:NIST SP 800-82 §5.3">
+  <data key="d8">has_clause</data>
+</edge>
+<edge source="CLAUSE:NIST_SP800_82:NIST SP 800-82 §5.3" target="REQ:NIST-SEED-001">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:NIST-SEED-001" target="EQ:ESD">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:NIST-SEED-001" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:NIST-SEED-001" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:NIST-SEED-001" target="CLAUSE:IEC61511:IEC 61511 Cl.8.2.4">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:OSHA_PSM_1910_119:1910.119(d)(3)(i)" target="REQ:OSHA_PSM-SEED-001">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="EQ:Column">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="EQ:PressureVessel">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="EQ:Separator">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-001" target="CLAUSE:IEC61511:IEC 61511 Cl.10.3.2">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:OSHA_PSM_1910_119:1910.119(j)(4)(ii)" target="REQ:OSHA_PSM-SEED-002">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="EQ:ReliefValve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="EQ:RuptureDisc">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="EQ:SafetyValve">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="SC:PressureTransmitter">
+  <data key="d8">monitored_by</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-002" target="CLAUSE:IEC61511:IEC 61511 Cl.16">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:OSHA_PSM_1910_119:1910.119(e)(1)" target="REQ:OSHA_PSM-SEED-004">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-004" target="ACT:DOCUMENT">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-004" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-004" target="CLAUSE:IEC61511:IEC 61511 Cl.8">
+  <data key="d8">iec_equivalent</data>
+</edge>
+<edge source="CLAUSE:OSHA_PSM_1910_119:1910.119(f)(1)" target="REQ:OSHA_PSM-SEED-005">
+  <data key="d8">contains</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="EQ:Column">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="EQ:Compressor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="EQ:Pump">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="EQ:Reactor">
+  <data key="d8">applies_to</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="ACT:STOP">
+  <data key="d8">triggers</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="COND:ANY">
+  <data key="d8">when_condition</data>
+</edge>
+<edge source="REQ:OSHA_PSM-SEED-005" target="CLAUSE:IEC61511:IEC 61511 Cl.11.8">
+  <data key="d8">iec_equivalent</data>
+</edge>
+</graph></graphml>

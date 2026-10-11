@@ -35,6 +35,10 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, TimeElapsedColumn
 
 from src.config import PipelineConfig
 from src.ingestion import PDFExtractor, TableExtractor, PIDExtractor
+from src.ingestion.entity_registry import GlobalEntityRegistry
+from src.ingestion.chunker import SemanticChunker
+from src.ingestion.image_extractor import PDFImageExtractor, IMAGE_SCANNED
+from src.ingestion.pdf_extractor import TextBlock
 from src.extraction import EntityExtractor
 from src.linking import CrossModalLinker
 from src.knowledge import KnowledgeGraphBuilder
@@ -72,6 +76,8 @@ class AuditRunResult:
     report_path: Path
     plc_output_path: Path
     graph_html_path: Optional[Path] = None
+    graph_node_count: int = 0
+    graph_edge_count: int = 0
     findings: List[AuditFinding] = field(default_factory=list)
     run_id: Optional[str] = None
 
@@ -129,27 +135,31 @@ class SafetyAuditor:
             #   pid_tags:    list of ISA tag strings from P&ID image OCR
             # The _phase1_ingest helper handles both single-PDF and directory inputs.
             task = progress.add_task("Phase 1: Ingesting documents...", total=None)
-            text_blocks, tables, pid_tags = self._phase1_ingest(input_path)
+            chunks, tables, pid_tags, registry = self._phase1_ingest(input_path)
             progress.remove_task(task)
-            logger.info(f"Phase 1 complete: {len(text_blocks)} blocks, {len(tables)} tables, {len(pid_tags)} P&ID tags")
+            logger.info(
+                f"Phase 1 complete: {len(chunks)} chunks, {len(tables)} tables, "
+                f"{len(pid_tags)} P&ID tags, registry={registry.size()} tags"
+            )
 
             # ═══════════════════════════════════════════════════════════════
             # PHASE 2 — LLM EXTRACTION
             # ═══════════════════════════════════════════════════════════════
-            # Send text blocks and table rows to Ollama (Qwen 2.5).
-            # The LLM returns JSON: equipment entities + condition-action rules.
-            # We extract separately from:
-            #   narrative modality  (text_blocks → free-text paragraphs)
-            #   table modality      (tables → structured C&E rows)
-            # Results from both modalities are pooled into one extraction_result.
-            # Low-confidence rules are flagged by the extractor for engineer review.
+            # Send semantic chunks (not raw text blocks) to Ollama (Qwen 2.5).
+            # The GlobalEntityRegistry is prepended to every chunk prompt so the
+            # LLM always has the full equipment tag inventory in context —
+            # this solves the cross-page reference problem (page 100 knows page 3).
             task = progress.add_task(f"Phase 2: Extracting entities via {self.config.llm_model}...", total=None)
             extractor = EntityExtractor(self.config)
-            extraction_result = extractor.extract_from_text_blocks(text_blocks, source_modality="narrative")
+            extraction_result = extractor.extract_from_chunks(
+                chunks, registry=registry, source_modality="narrative"
+            )
             for table in tables:
                 table_result = extractor.extract_from_table(table, source_modality="table")
                 extraction_result.entities.extend(table_result.entities)
                 extraction_result.rules.extend(table_result.rules)
+                extraction_result.low_confidence_count += table_result.low_confidence_count
+                extraction_result.extraction_errors.extend(table_result.extraction_errors)
             progress.remove_task(task)
             logger.info(f"Phase 2 complete: {len(extraction_result.entities)} entities, {len(extraction_result.rules)} raw rules")
 
@@ -261,9 +271,10 @@ class SafetyAuditor:
             # it lets the process safety engineer trace every number back to its source.
             task = progress.add_task("Phase 8: Generating audit report...", total=None)
             extraction_stats = {
-                "Text blocks extracted": len(text_blocks),
+                "Semantic chunks processed": len(chunks),
                 "Tables extracted": len(tables),
                 "P&ID tags extracted": len(pid_tags),
+                "Registry size (unique tags)": registry.size(),
                 "Raw entities": len(extraction_result.entities),
                 "Raw rules": len(extraction_result.rules),
                 "Linked entities (canonical)": len(linked_entities),
@@ -347,6 +358,8 @@ class SafetyAuditor:
             report_path=report_path,
             plc_output_path=plc_output.output_path,
             graph_html_path=graph_html,
+            graph_node_count=graph.node_count,
+            graph_edge_count=graph.edge_count,
             findings=findings,
             run_id=run_id,
         )
@@ -355,51 +368,107 @@ class SafetyAuditor:
         """
         Extract raw content from all documents in the specification package.
 
-        Accepts either:
-          - A single PDF file  (e.g. for a combined control narrative + C&E table)
-          - A directory        (e.g. benchmark package with multiple PDFs + P&ID image)
-
         Returns:
-            text_blocks: list of TextBlock (text + page number + source PDF)
-            tables:      list of TableData (rows/cols + source PDF)
-            pid_tags:    deduplicated list of ISA tag strings from P&ID tag inventory
+            chunks   : List[DocumentChunk]       — semantically chunked text for Phase 2
+            tables   : List[ExtractedTable]      — C&E tables for Phase 2 table extraction
+            pid_tags : List[str]                 — deduplicated ISA tags from images/OCR
+            registry : GlobalEntityRegistry     — full-document tag inventory for cross-page context
+
+        Three mechanisms are applied:
+
+        1. GLOBAL ENTITY REGISTRY
+           Fast regex first-pass over all text blocks → builds {tag: (page, snippet)} map.
+           Injected into every LLM prompt chunk so rules on late pages can resolve
+           equipment tags first defined on early pages.
+
+        2. SEMANTIC CHUNKING
+           PDFExtractor.extract() returns flat TextBlock list.
+           SemanticChunker groups them into DocumentChunk objects at section-heading
+           boundaries, then splits oversized sections with overlap.  One LLM call per
+           chunk (not one per page) — safe cut points, no rules split across chunks.
+
+        3. IMAGE EXTRACTION
+           PDFImageExtractor scans every page for:
+             - Scanned pages (image-only, < 30 chars text): full-page OCR at config.pid_ocr_dpi DPI
+             - Large embedded images (>= config.pid_candidate_min_px wide): full P&ID pipeline
+             - Medium embedded images (100–800 px): Tesseract PSM 6 for text labels
+           All extracted ISA tags are merged into pid_tags and registry.
         """
-        pdf_extractor = PDFExtractor()
+        pdf_extractor   = PDFExtractor()
         table_extractor = TableExtractor()
-        pid_extractor = PIDExtractor(tesseract_cmd=self.config.tesseract_cmd)
+        pid_extractor   = PIDExtractor(tesseract_cmd=self.config.tesseract_cmd)
+        img_extractor   = PDFImageExtractor()
+        chunker         = SemanticChunker(
+            max_chars    = self.config.chunk_max_chars,
+            overlap_chars= self.config.chunk_overlap_chars,
+        )
 
-        text_blocks = []
-        tables = []
-        pid_tags = []
+        all_text_blocks = []
+        tables          = []
+        pid_tags        = []
 
+        # ── Collect PDFs ──────────────────────────────────────────────────────
         if input_path.is_file() and input_path.suffix.lower() == ".pdf":
             pdfs = [input_path]
         elif input_path.is_dir():
-            # Recursively collect all PDFs — handles nested spec packages
             pdfs = list(input_path.glob("**/*.pdf"))
         else:
             pdfs = []
 
+        # ── Per-PDF extraction ────────────────────────────────────────────────
         for pdf in pdfs:
             try:
-                text_blocks.extend(pdf_extractor.extract(pdf))
+                # Text and table extraction (existing)
+                blocks = pdf_extractor.extract(pdf)
+                all_text_blocks.extend(blocks)
                 tables.extend(table_extractor.extract(pdf))
+
+                # Image extraction (new): scanned pages + embedded images
+                images = img_extractor.extract_from_pdf(pdf, pid_extractor, self.config)
+                for img in images:
+                    pid_tags.extend(img.extracted_tags)
+                    # For scanned pages: add full-text OCR as a TextBlock so
+                    # the LLM can extract entities and rules from prose content.
+                    if img.image_class == IMAGE_SCANNED and img.full_text_ocr:
+                        all_text_blocks.append(TextBlock(
+                            text=img.full_text_ocr,
+                            page=img.page,
+                            bbox=(0.0, 0.0, 0.0, 0.0),
+                            source_doc=pdf.name,
+                            block_type="paragraph",
+                        ))
+
             except Exception as e:
-                # Warn but continue — a corrupt PDF in a directory should not
-                # abort the entire audit; partial extraction is better than none
                 logger.warning(f"Extraction failed for {pdf}: {e}")
 
-        # P&ID tags come from either:
-        #   a) a pre-extracted tag list file ("*pid_tags*.txt") — used in benchmark
-        #   b) raw P&ID diagram images (.png) — OCR via OpenCV + Tesseract
+        # ── Directory-level P&ID sources (existing, kept) ────────────────────
+        # These supplement the embedded-image pipeline for benchmark packages
+        # that ship pre-extracted tag lists or standalone PNG diagrams.
         if input_path.is_dir():
             for tag_file in input_path.glob("*pid_tags*.txt"):
                 extraction = pid_extractor.extract_from_tag_list(tag_file)
                 pid_tags.extend(extraction.tags)
-            for img_file in input_path.glob("*.png"):
-                extraction = pid_extractor.extract_from_image(img_file)
-                pid_tags.extend(extraction.tags)
+            for img_file in list(input_path.glob("*.png")) + list(input_path.glob("*.jpg")):
+                try:
+                    extraction = pid_extractor.extract_from_image(img_file)
+                    pid_tags.extend(extraction.tags)
+                except Exception as e:
+                    logger.warning(f"Image extraction failed for {img_file.name}: {e}")
 
-        # Deduplicate — the same tag may appear in both the text file and the image
+        # ── Mechanism 1: Global Entity Registry ───────────────────────────────
+        registry = GlobalEntityRegistry().build_from_blocks(all_text_blocks)
+        # Merge P&ID-sourced tags into the registry (page=0 sentinel)
+        registry.add_tags_from_list(list(set(pid_tags)), source_doc="pid_ocr")
+
+        # ── Mechanism 2: Semantic chunking ────────────────────────────────────
+        chunks = chunker.chunk(all_text_blocks)
+
+        # ── Deduplicate pid_tags ──────────────────────────────────────────────
         pid_tags = list(set(pid_tags))
-        return text_blocks, tables, pid_tags
+
+        logger.info(
+            f"_phase1_ingest: {len(all_text_blocks)} blocks → {len(chunks)} chunks | "
+            f"{len(tables)} tables | {len(pid_tags)} P&ID tags | "
+            f"registry={registry.size()} tags"
+        )
+        return chunks, tables, pid_tags, registry

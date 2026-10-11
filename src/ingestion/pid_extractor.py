@@ -67,7 +67,63 @@ class PIDExtractor:
 
         img_array = np.frombuffer(img_bytes, dtype=np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        if img is None:
+            logger.warning(f"Could not decode rendered page {page_num} of {pdf_path.name}")
+            return TagExtraction(tags=[], source_doc=pdf_path.name, page=page_num)
         return self._extract_from_image(img, source_doc=pdf_path.name, page=page_num)
+
+    def extract_from_pdf_page_range(
+        self, pdf_path: Path, pages: List[int], dpi: int = 300
+    ) -> List[TagExtraction]:
+        """
+        Extract tags from multiple pages of a PDF (rendered as images).
+
+        Useful when a P&ID spans several pages or when the caller has already
+        identified which pages are image-only (scanned pages).
+
+        Args:
+            pdf_path: path to the PDF
+            pages   : list of 1-based page numbers to process
+            dpi     : render DPI (higher = better OCR quality, slower)
+
+        Returns list of TagExtraction, one per page.
+        """
+        try:
+            import pymupdf as fitz
+        except ImportError:
+            import fitz
+
+        pdf_path = Path(pdf_path)
+        doc      = fitz.open(str(pdf_path))
+        scale    = dpi / 72.0
+        mat      = fitz.Matrix(scale, scale)
+        results: List[TagExtraction] = []
+
+        for page_num in pages:
+            if page_num < 1 or page_num > len(doc):
+                logger.warning(f"Page {page_num} out of range for {pdf_path.name} ({len(doc)} pages)")
+                continue
+            try:
+                page      = doc[page_num - 1]
+                pix       = page.get_pixmap(matrix=mat)
+                img_bytes = pix.tobytes("png")
+                img_array = np.frombuffer(img_bytes, dtype=np.uint8)
+                img       = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                if img is None:
+                    logger.warning(f"Could not decode page {page_num} of {pdf_path.name}")
+                    continue
+                extraction = self._extract_from_image(img, source_doc=pdf_path.name, page=page_num)
+                results.append(extraction)
+            except Exception as exc:
+                logger.warning(f"P&ID render failed for {pdf_path.name} p.{page_num}: {exc}")
+
+        doc.close()
+        total_tags = sum(len(r.tags) for r in results)
+        logger.info(
+            f"extract_from_pdf_page_range [{pdf_path.name}] "
+            f"pages={pages}: {len(results)} pages processed, {total_tags} tags"
+        )
+        return results
 
     def extract_from_image(self, image_path: Path) -> TagExtraction:
         """Extract tags from a standalone P&ID image file."""
@@ -90,11 +146,21 @@ class PIDExtractor:
             preprocessed,
             config="--psm 11 --oem 3 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
         )
-
         tags = sorted(set(TAG_PATTERN.findall(ocr_text.upper())))
 
+        # Per-word bounding boxes for spatial tag-to-symbol association
+        try:
+            from pytesseract import Output as TessOutput
+            ocr_data = self._pytesseract.image_to_data(
+                preprocessed,
+                config="--psm 11 --oem 3",
+                output_type=TessOutput.DICT,
+            )
+        except Exception:
+            ocr_data = {"text": [], "left": [], "top": [], "width": [], "height": []}
+
         # Basic ISA 5.1 symbol detection via contour geometry
-        symbols = self._detect_symbols(img, tags)
+        symbols = self._detect_symbols(img, tags, ocr_data)
 
         logger.info(f"P&ID extraction: {len(tags)} tags, {len(symbols)} symbols from {source_doc} p.{page}")
         return TagExtraction(
@@ -117,7 +183,7 @@ class PIDExtractor:
         dilated = cv2.dilate(thresh, kernel, iterations=1)
         return cv2.bitwise_not(dilated)
 
-    def _detect_symbols(self, img: np.ndarray, known_tags: List[str]) -> List[DetectedSymbol]:
+    def _detect_symbols(self, img: np.ndarray, known_tags: List[str], ocr_data: dict) -> List[DetectedSymbol]:
         """
         Detect common ISA 5.1 symbols using contour geometry heuristics.
         Circles → instruments/transmitters; large circles with inscribed shapes → pumps.
@@ -145,8 +211,11 @@ class PIDExtractor:
             else:
                 continue
 
-            # Find tags near this symbol (within 100px)
-            nearby = [t for t in known_tags if self._tag_near_bbox(t, (x, y, w, h), img.shape)]
+            # Find tags near this symbol using per-word OCR bounding boxes
+            nearby = [
+                t for t in known_tags
+                if self._tag_near_bbox(t, (x, y, w, h), ocr_data)
+            ]
             symbols.append(DetectedSymbol(
                 symbol_class=symbol_class,
                 bbox=(x, y, w, h),
@@ -156,7 +225,29 @@ class PIDExtractor:
         return symbols
 
     @staticmethod
-    def _tag_near_bbox(tag: str, bbox: Tuple, img_shape: Tuple) -> bool:
-        # Without OCR bounding boxes for each tag, we cannot do precise spatial matching.
-        # Return False for now; override if per-word OCR data is available.
+    def _tag_near_bbox(tag: str, bbox: Tuple, ocr_data: dict) -> bool:
+        """
+        Check whether `tag` appears within 100px of a symbol bounding box,
+        using per-word bounding boxes from pytesseract.image_to_data().
+
+        `ocr_data` must be the dict returned by:
+            pytesseract.image_to_data(img, output_type=Output.DICT)
+
+        Returns True if any word in ocr_data whose text matches `tag` has
+        its centre within 100px of the symbol centre.
+        """
+        sym_cx = bbox[0] + bbox[2] / 2
+        sym_cy = bbox[1] + bbox[3] / 2
+        words = ocr_data.get("text", [])
+        lefts = ocr_data.get("left",  [])
+        tops  = ocr_data.get("top",   [])
+        widths= ocr_data.get("width", [])
+        heights=ocr_data.get("height",[])
+        for i, word in enumerate(words):
+            if str(word).strip().upper() == tag.upper():
+                word_cx = lefts[i] + widths[i]  / 2
+                word_cy = tops[i]  + heights[i] / 2
+                dist = ((word_cx - sym_cx)**2 + (word_cy - sym_cy)**2) ** 0.5
+                if dist <= 100:
+                    return True
         return False

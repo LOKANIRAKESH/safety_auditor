@@ -1,0 +1,98 @@
+[
+  {
+    "id": "IEC61511-SEED-004",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.6.2",
+    "description": "A pump must have a low-flow or low-suction-pressure interlock that trips the pump motor to prevent cavitation and mechanical damage.",
+    "requirement_type": "interlock",
+    "equipment_classes": [
+      "Pump"
+    ],
+    "sensor_classes": [
+      "FlowTransmitter",
+      "PressureTransmitter"
+    ],
+    "condition_type": "LOW_LOW",
+    "action_required": "STOP",
+    "setpoint_role": "TRIP",
+    "iec_equivalent": "IEC 61511 Cl.11.6",
+    "confidence": 0.95
+  },
+  {
+    "id": "IEC61511-SEED-007",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.6.4",
+    "description": "A pressure vessel operating above atmospheric pressure must have a pressure relief device sized to prevent pressure exceeding MAWP.",
+    "requirement_type": "interlock",
+    "equipment_classes": [
+      "PressureVessel",
+      "Reactor",
+      "Separator"
+    ],
+    "sensor_classes": [
+      "PressureTransmitter"
+    ],
+    "condition_type": "HIGH_HIGH",
+    "action_required": "CLOSE",
+    "setpoint_role": "TRIP",
+    "iec_equivalent": "IEC 61511 Cl.11.6",
+    "confidence": 0.95
+  },
+  {
+    "id": "IEC61511-SEED-009",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.8.3",
+    "description": "ESD system must be independent of the basic process control system (BPCS) to prevent common-cause failure.",
+    "requirement_type": "interlock",
+    "equipment_classes": [
+      "ESD"
+    ],
+    "sensor_classes": [],
+    "condition_type": "ANY",
+    "action_required": "VERIFY",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.11.8",
+    "confidence": 1.0
+  },
+  {
+    "id": "IEC61511-SEED-010",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.6.5",
+    "description": "Safety instrumented function (SIF) final elements (valves, motors) must fail to a safe state on loss of power or signal (fail-safe design).",
+    "requirement_type": "interlock",
+    "equipment_classes": [
+      "ControlValve",
+      "Motor",
+      "ShutdownValve",
+      "Valve"
+    ],
+    "sensor_classes": [],
+    "condition_type": "ANY",
+    "action_required": "CLOSE",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.11.6",
+    "confidence": 1.0
+  },
+  {
+    "id": "IEC61511-SEED-014",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.4.3",
+    "description": "SIL 2 or higher safety instrumented functions require redundant sensors (1oo2 or 2oo3 voting) to achieve the required probability of failure on demand.",
+    "requirement_type": "interlock",
+    "equipment_classes": [
+      "Compressor",
+      "PressureVessel",
+      "Reactor"
+    ],
+    "sensor_classes": [
+      "LevelTransmitter",
+      "PressureTransmitter",
+      "TemperatureSensor"
+    ],
+    "condition_type": "ANY",
+    "action_required": "VERIFY",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.11.4",
+    "confidence": 0.9
+  }
+]

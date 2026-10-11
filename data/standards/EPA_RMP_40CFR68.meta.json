@@ -1,0 +1,17 @@
+{
+  "source_id": "EPA_RMP_40CFR68",
+  "title": "EPA Risk Management Program \u2014 40 CFR Part 68",
+  "standard_ref": "EPA 40 CFR Part 68",
+  "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-68/",
+  "filetype": "html",
+  "iec_coverage": [
+    "IEC 61511 Cl.5",
+    "IEC 61511 Cl.8.2"
+  ],
+  "freely_available": true,
+  "notes": "US federal regulation. Defines worst-case release scenarios and required safety system documentation. Public domain.",
+  "download_timestamp": "2026-10-08T11:47:18.610260+00:00",
+  "file_size_bytes": 10596,
+  "sha256": "ec7904e6ddcbb66610147b7e9d5a005511ff9f9682f025b6d49c2cb4c1f00754",
+  "local_path": "C:\\Users\\I781541\\Desktop\\m-tech\\safety_auditor\\data\\standards\\EPA_RMP_40CFR68.html"
+}

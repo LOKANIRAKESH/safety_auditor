@@ -1,0 +1,18 @@
+{
+  "source_id": "HSE_HSG254",
+  "title": "HSE Developing Process Safety Indicators \u2014 Safety Instrumented Systems",
+  "standard_ref": "HSE HSG254 (UK)",
+  "url": "https://www.hse.gov.uk/pubns/priced/hsg254.pdf",
+  "filetype": "pdf",
+  "iec_coverage": [
+    "IEC 61511 Cl.9",
+    "IEC 61511 Cl.10",
+    "IEC 61511 Cl.11"
+  ],
+  "freely_available": true,
+  "notes": "UK Health and Safety Executive. Clause-by-clause guidance on IEC 61511 alarm and shutdown rule requirements. Crown copyright, freely available for research.",
+  "download_timestamp": "2026-10-08T11:47:26.524424+00:00",
+  "file_size_bytes": 1507574,
+  "sha256": "99efb39229515b76116a1fb7c8b01b48c1e3033c139bcabb2e32c09dec732525",
+  "local_path": "C:\\Users\\I781541\\Desktop\\m-tech\\safety_auditor\\data\\standards\\HSE_HSG254.pdf"
+}

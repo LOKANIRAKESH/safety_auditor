@@ -1,0 +1,62 @@
+[
+  {
+    "id": "IEC61511-SEED-006",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.6.3",
+    "description": "A compressor must have a high-high discharge pressure trip that stops the compressor before pressure exceeds its design pressure.",
+    "requirement_type": "shutdown",
+    "equipment_classes": [
+      "Compressor"
+    ],
+    "sensor_classes": [
+      "PressureTransmitter"
+    ],
+    "condition_type": "HIGH_HIGH",
+    "action_required": "STOP",
+    "setpoint_role": "TRIP",
+    "iec_equivalent": "IEC 61511 Cl.11.6",
+    "confidence": 0.95
+  },
+  {
+    "id": "IEC61511-SEED-008",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.8",
+    "description": "An Emergency Shutdown (ESD) system must be able to bring the process to a safe state from any normal operating condition.",
+    "requirement_type": "shutdown",
+    "equipment_classes": [
+      "Compressor",
+      "ESD",
+      "Pump",
+      "ShutdownValve"
+    ],
+    "sensor_classes": [
+      "GasDetector",
+      "LevelTransmitter",
+      "PressureTransmitter"
+    ],
+    "condition_type": "ANY",
+    "action_required": "STOP",
+    "setpoint_role": "TRIP",
+    "iec_equivalent": "IEC 61511 Cl.11.8",
+    "confidence": 1.0
+  },
+  {
+    "id": "OSHA_PSM-SEED-005",
+    "standard_ref": "OSHA 29 CFR 1910.119",
+    "clause_ref": "1910.119(f)(1)",
+    "description": "The employer must develop and implement written operating procedures that provide clear instructions for safely conducting activities involved in each covered process, including emergency shutdown.",
+    "requirement_type": "shutdown",
+    "equipment_classes": [
+      "Column",
+      "Compressor",
+      "Pump",
+      "Reactor"
+    ],
+    "sensor_classes": [],
+    "condition_type": "ANY",
+    "action_required": "STOP",
+    "setpoint_role": "TRIP",
+    "iec_equivalent": "IEC 61511 Cl.11.8",
+    "confidence": 1.0
+  }
+]

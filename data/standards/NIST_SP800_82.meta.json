@@ -1,0 +1,18 @@
+{
+  "source_id": "NIST_SP800_82",
+  "title": "NIST SP 800-82 Guide to ICS Security \u2014 Safety System Requirements",
+  "standard_ref": "NIST SP 800-82 Rev.3",
+  "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf",
+  "filetype": "pdf",
+  "iec_coverage": [
+    "IEC 61511 Cl.8.2",
+    "IEC 61511 Cl.10",
+    "IEC 61511 Cl.11"
+  ],
+  "freely_available": true,
+  "notes": "US NIST. Chapter 5 covers SIS/SIF requirements with explicit setpoint and alarm rule requirements. Public domain.",
+  "download_timestamp": "2026-10-08T11:47:23.278288+00:00",
+  "file_size_bytes": 8584345,
+  "sha256": "608f554514d381853e24e0b33123b7080fbd757826f460032690aade63394616",
+  "local_path": "C:\\Users\\I781541\\Desktop\\m-tech\\safety_auditor\\data\\standards\\NIST_SP800_82.pdf"
+}

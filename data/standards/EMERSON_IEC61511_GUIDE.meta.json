@@ -1,0 +1,19 @@
+{
+  "source_id": "EMERSON_IEC61511_GUIDE",
+  "title": "Emerson Process Management \u2014 IEC 61511 Compliance Guide",
+  "standard_ref": "IEC 61511 (manufacturer guide)",
+  "url": "https://www.emerson.com/documents/automation/white-paper-iec61511-compliance-guide-en-5412448.pdf",
+  "filetype": "pdf",
+  "iec_coverage": [
+    "IEC 61511 Cl.9",
+    "IEC 61511 Cl.10",
+    "IEC 61511 Cl.11",
+    "IEC 61511 Cl.16"
+  ],
+  "freely_available": true,
+  "notes": "Emerson white paper. Contains full clause-by-clause requirement checklist with rule descriptions. Freely available.",
+  "download_timestamp": "2026-10-08T11:47:31.728719+00:00",
+  "file_size_bytes": 240150,
+  "sha256": "bc7e8d7f77b6832ee853deaa5fb42eb1f74e55eb3d27609784e98e37e9fe44c1",
+  "local_path": "C:\\Users\\I781541\\Desktop\\m-tech\\safety_auditor\\data\\standards\\EMERSON_IEC61511_GUIDE.pdf"
+}

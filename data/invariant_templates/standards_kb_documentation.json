@@ -1,0 +1,122 @@
+[
+  {
+    "id": "EPA_RMP-SEED-001",
+    "standard_ref": "EPA 40 CFR Part 68",
+    "clause_ref": "40 CFR 68.67(c)(6)",
+    "description": "Process hazard analysis must address engineering and administrative controls applicable to the hazards and their interrelationships.",
+    "requirement_type": "documentation",
+    "equipment_classes": [],
+    "sensor_classes": [],
+    "condition_type": "ANY",
+    "action_required": "DOCUMENT",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.8.2",
+    "confidence": 1.0
+  },
+  {
+    "id": "IEC61511-SEED-011",
+    "standard_ref": "OSHA 29 CFR 1910.119",
+    "clause_ref": "1910.119(d)(3)(i)(B)",
+    "description": "Process safety information must document relief system design basis for toxic or highly hazardous chemicals.",
+    "requirement_type": "documentation",
+    "equipment_classes": [
+      "FireDetector",
+      "GasDetector",
+      "SafetyValve"
+    ],
+    "sensor_classes": [
+      "FireDetector",
+      "GasDetector"
+    ],
+    "condition_type": "ANY",
+    "action_required": "ALARM",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.10.3",
+    "confidence": 0.9
+  },
+  {
+    "id": "IEC61511-SEED-013",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.16.4",
+    "description": "Every safety instrumented function must be proof-tested at a frequency sufficient to maintain the required SIL.",
+    "requirement_type": "documentation",
+    "equipment_classes": [],
+    "sensor_classes": [],
+    "condition_type": "ON_DEMAND",
+    "action_required": "VERIFY",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.16.4",
+    "confidence": 1.0
+  },
+  {
+    "id": "NIST-SEED-001",
+    "standard_ref": "NIST SP 800-82 Rev.3",
+    "clause_ref": "NIST SP 800-82 \u00a75.3",
+    "description": "Safety instrumented systems must be isolated from corporate IT networks; any connection must be through a DMZ with a data diode or unidirectional gateway.",
+    "requirement_type": "documentation",
+    "equipment_classes": [
+      "ESD"
+    ],
+    "sensor_classes": [],
+    "condition_type": "ANY",
+    "action_required": "DOCUMENT",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.8.2.4",
+    "confidence": 0.9
+  },
+  {
+    "id": "OSHA_PSM-SEED-001",
+    "standard_ref": "OSHA 29 CFR 1910.119",
+    "clause_ref": "1910.119(d)(3)(i)",
+    "description": "Process safety information must include relief system design and design basis for all process equipment operating above atmospheric pressure.",
+    "requirement_type": "documentation",
+    "equipment_classes": [
+      "Column",
+      "PressureVessel",
+      "Reactor",
+      "Separator"
+    ],
+    "sensor_classes": [
+      "PressureTransmitter"
+    ],
+    "condition_type": "ANY",
+    "action_required": "DOCUMENT",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.10.3.2",
+    "confidence": 1.0
+  },
+  {
+    "id": "OSHA_PSM-SEED-002",
+    "standard_ref": "OSHA 29 CFR 1910.119",
+    "clause_ref": "1910.119(j)(4)(ii)",
+    "description": "Written procedures must be established and implemented for maintaining the mechanical integrity of safety relief devices.",
+    "requirement_type": "documentation",
+    "equipment_classes": [
+      "ReliefValve",
+      "RuptureDisc",
+      "SafetyValve"
+    ],
+    "sensor_classes": [
+      "PressureTransmitter"
+    ],
+    "condition_type": "ANY",
+    "action_required": "DOCUMENT",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.16",
+    "confidence": 1.0
+  },
+  {
+    "id": "OSHA_PSM-SEED-004",
+    "standard_ref": "OSHA 29 CFR 1910.119",
+    "clause_ref": "1910.119(e)(1)",
+    "description": "The employer must perform an initial process hazard analysis (PHA) on processes covered by this standard.",
+    "requirement_type": "documentation",
+    "equipment_classes": [],
+    "sensor_classes": [],
+    "condition_type": "ANY",
+    "action_required": "DOCUMENT",
+    "setpoint_role": "NONE",
+    "iec_equivalent": "IEC 61511 Cl.8",
+    "confidence": 1.0
+  }
+]

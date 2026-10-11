@@ -36,6 +36,15 @@ class PipelineConfig(BaseSettings):
     # Reporting
     report_format: str = "html"
 
+    # Phase 1 — Semantic chunking for large PDFs
+    chunk_max_chars: int = 5000        # max chars per DocumentChunk before splitting
+    chunk_overlap_chars: int = 300     # overlap between adjacent oversized chunks
+
+    # Phase 1 — Image extraction thresholds
+    pid_ocr_dpi: int = 300             # DPI for rendering scanned pages / P&ID pages
+    image_min_size_px: int = 100       # skip images smaller than this (icons/logos)
+    pid_candidate_min_px: int = 800    # images wider than this get full P&ID pipeline
+
     # Tesseract (update path for Windows if needed)
     tesseract_cmd: str = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 

@@ -1,5 +1,6 @@
 """Phase 4 — NetworkX knowledge graph from linked entities and rules."""
 from __future__ import annotations
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
@@ -7,6 +8,50 @@ import networkx as nx
 from loguru import logger
 from src.linking.cross_modal_linker import LinkedEntity
 from src.extraction.entity_extractor import ExtractedRule
+
+# Load vis-network.js inline once — avoids CDN dependency in corporate/offline environments
+_VIS_JS_INLINE: str = ""
+try:
+    _vis_js_path = Path(__file__).parent.parent.parent / "ui" / "vis-network.min.js"
+    if _vis_js_path.exists():
+        _VIS_JS_INLINE = _vis_js_path.read_text(encoding="utf-8")
+except Exception:
+    pass
+
+
+def _make_vis_html(nodes_data: list, edges_data: list,
+                   height: str = "600px", bgcolor: str = "#1e1e2e") -> str:
+    """Self-contained vis.js HTML that renders inside Streamlit's iframe."""
+    if _VIS_JS_INLINE:
+        script_tag = f"<script>{_VIS_JS_INLINE}</script>"
+    else:
+        script_tag = '<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>'
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+{script_tag}
+<style>
+  html,body{{margin:0;padding:0;background:{bgcolor};overflow:hidden;}}
+  #graph{{width:100%;height:{height};background:{bgcolor};}}
+</style>
+</head>
+<body>
+<div id="graph"></div>
+<script>
+  var nodes = new vis.DataSet({json.dumps(nodes_data)});
+  var edges = new vis.DataSet({json.dumps(edges_data)});
+  var container = document.getElementById("graph");
+  var options = {{
+    physics:{{stabilization:{{iterations:200,fit:true}},barnesHut:{{gravitationalConstant:-8000,springLength:120}}}},
+    nodes:{{font:{{color:"#ffffff",size:13}},borderWidth:1,shape:"dot"}},
+    edges:{{font:{{color:"#aaaaaa",size:10,align:"middle"}},arrows:{{to:{{enabled:true,scaleFactor:0.6}}}},smooth:{{type:"dynamic"}}}},
+    interaction:{{hover:true,tooltipDelay:80}}
+  }};
+  new vis.Network(container, {{nodes:nodes, edges:edges}}, options);
+</script>
+</body>
+</html>"""
 
 
 @dataclass
@@ -16,21 +61,34 @@ class EquipmentGraph:
     edge_count: int
 
     def to_pyvis_html(self, output_path: Path) -> Path:
-        """Export as interactive PyVis HTML for Streamlit embedding."""
-        try:
-            from pyvis.network import Network
-            net = Network(height="600px", width="100%", directed=True, bgcolor="#1e1e2e", font_color="white")
-            net.from_nx(self.graph)
-            # Style nodes by entity class
-            for node_id, attrs in self.graph.nodes(data=True):
-                color = _CLASS_COLORS.get(attrs.get("entity_class", "Unknown"), "#888888")
-                net.get_node(node_id)["color"] = color
-                net.get_node(node_id)["title"] = attrs.get("description", node_id)
-            net.save_graph(str(output_path))
-            return output_path
-        except ImportError:
-            logger.warning("PyVis not installed — skipping interactive graph export.")
-            return output_path
+        """Export as a self-contained vis.js HTML for Streamlit embedding."""
+        import json
+
+        nodes_data = []
+        for node_id, attrs in self.graph.nodes(data=True):
+            color = _CLASS_COLORS.get(attrs.get("entity_class", "Unknown"), "#888888")
+            nodes_data.append({
+                "id":    node_id,
+                "label": node_id,
+                "color": color,
+                "size":  20,
+                "title": attrs.get("description", node_id),
+            })
+
+        edges_data = []
+        for src, dst, attrs in self.graph.edges(data=True):
+            edges_data.append({
+                "from":  src,
+                "to":    dst,
+                "label": attrs.get("label", ""),
+                "color": "#666699",
+                "width": 1,
+            })
+
+        html = _make_vis_html(nodes_data, edges_data)
+        output_path = Path(output_path)
+        output_path.write_text(html, encoding="utf-8")
+        return output_path
 
     def get_equipment_by_class(self, entity_class: str) -> List[str]:
         return [n for n, d in self.graph.nodes(data=True) if d.get("entity_class") == entity_class]

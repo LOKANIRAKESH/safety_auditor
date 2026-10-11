@@ -1,0 +1,18 @@
+{
+  "source_id": "OSHA_PSM_1910_119",
+  "title": "OSHA Process Safety Management Standard \u2014 29 CFR 1910.119",
+  "standard_ref": "OSHA 29 CFR 1910.119",
+  "url": "https://www.govinfo.gov/content/pkg/CFR-2023-title29-vol5/pdf/CFR-2023-title29-vol5-sec1910-119.pdf",
+  "filetype": "pdf",
+  "iec_coverage": [
+    "IEC 61511 Cl.5",
+    "IEC 61511 Cl.8",
+    "IEC 61511 Cl.10"
+  ],
+  "freely_available": true,
+  "notes": "US federal law. Defines process safety information, PHA requirements, operating procedures, and mechanical integrity of SIS. Public domain.",
+  "download_timestamp": "2026-10-08T11:47:16.322849+00:00",
+  "file_size_bytes": 326468,
+  "sha256": "d76007b10f92c452c817149214208c5aace4431604b40f8df435f0c5f4be757f",
+  "local_path": "C:\\Users\\I781541\\Desktop\\m-tech\\safety_auditor\\data\\standards\\OSHA_PSM_1910_119.pdf"
+}

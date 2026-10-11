@@ -1,0 +1,20 @@
+[
+  {
+    "id": "IEC61511-SEED-012",
+    "standard_ref": "IEC 61511-1:2016",
+    "clause_ref": "IEC 61511 Cl.11.6.6",
+    "description": "A combustible or toxic gas detector must trigger a HIGH alarm before concentration reaches the LEL/IDLH threshold.",
+    "requirement_type": "alarm",
+    "equipment_classes": [
+      "GasDetector"
+    ],
+    "sensor_classes": [
+      "GasDetector"
+    ],
+    "condition_type": "HIGH",
+    "action_required": "ALARM",
+    "setpoint_role": "ALARM",
+    "iec_equivalent": "IEC 61511 Cl.11.6",
+    "confidence": 0.9
+  }
+]
